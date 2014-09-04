@@ -1,4 +1,5 @@
 class MovesController < ApplicationController
+  load_and_authorize_resource 
   # GET /moves
   # GET /moves.json
   def index

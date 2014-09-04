@@ -12,9 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :player_2_id %>
-    <%= f.collection_select :player_2_id, User.all, :id, :name, include_blank: "Computer"%>
-    
+    <%= f.label :player_2_id %> <br/>
+    <div class="select_box">
+    <%= f.collection_select :player_2_id, (User.all.to_a - [current_user]), :id, :name %>
+    </div>
   </div>
   <div class="field">
     <%= f.label :grid_size %><br />

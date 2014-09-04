@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
      session[:user_id] = nil
    end
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to '/unauthorised.html', alert: "Sorry, you can't access this page"
+  end
+  
 end

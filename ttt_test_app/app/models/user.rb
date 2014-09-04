@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   has_many :games
   has_many :moves
 
+  def role?(role_to_compare)
+    self.role.to_s == role_to_compare.to_s
+  end
+
   def games
     Game.where("games.player_1_id = :id or games.player_2_id = :id", id: id )
   end
@@ -19,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def games_lost
-    Game.where("games.winner_id != :id and games.outcome = 'Finished'", id: id)
+    games - games_won - games_draw - games_in_progress
   end
 
   def number_of_games_won
@@ -38,4 +42,11 @@ class User < ActiveRecord::Base
     games_draw.count
   end
 
+  def games_in_progress
+    games.where(outcome: 'In progress')
+  end
+
+  def number_of_games_in_progress
+    games_in_progress.count
+  end
 end

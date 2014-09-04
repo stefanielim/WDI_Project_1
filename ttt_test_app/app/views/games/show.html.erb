@@ -7,7 +7,7 @@
 
 <p>
   <b>Player 2 Name:</b>
-  <%= @game.player_2.name rescue 'Computer'%>
+  <%= @game.player_2.name%>
 </p>
 
 <% if @game.outcome %>
@@ -21,7 +21,7 @@
 <p>
   <b>Winner:</b>
   <% if @game.winner_id? %>
-    <%= @game.winner.name rescue 'Computer'%>
+    <%= @game.winner.name%>
   <% else %>
     N/A   
   <% end %>
@@ -29,12 +29,12 @@
 
 
 <% if !@game.finished? %>
-<h2>Go, <%= @game.whose_turn.name rescue 'Computer' %>!</h2>
+<h2>Go, <%= @game.whose_turn.name %>!</h2>
 <% end %>
 
 <% if @game.finished? && @game.won?%>
 <h2>And we have a winner! <br/>
-  Congratulations, <%= @game.winner.name rescue 'Computer'%></h2>
+  Congratulations, <%= @game.winner.name%></h2>
 <% end %>
 
 <% if @game.finished? && @game.draw?%>
@@ -57,5 +57,6 @@
 
   <%= render 'move' %>
 </div>
+
 
 <%= link_to 'Back', games_path %>

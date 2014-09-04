@@ -10,6 +10,35 @@
   <%= @user.email %>
 </p>
 
+<h1>Your games</h1>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user.games == [] %>
+  <p>You have no games at the moment. <%= link_to "Create one!", new_game_path%></p>
+<% else %>
+  <table>
+    <tr>
+      <th>Player 1 name</th>
+      <th>Player 2 Name</th>
+      <th>Grid</th>
+      <th>Status</th>
+      <th>Winner</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @user.games.each do |game| %>
+      <tr>
+        <td><%= game.player_1.name %></td>
+        <td><%= game.player_2.name rescue nil%></td>
+        <td><%= game.grid_size%> x <%= game.grid_size%></td>
+        <td><%= game.outcome  %></td>
+        <td><%= game.winner.name rescue game.outcome == 'In progress' ? nil : 'Draw' %></td>
+        <td><%= link_to 'Show', game if can? :read, Game %></td>
+        <td><%= link_to 'Edit', edit_game_path(game) if can? :update, Game %></td>
+        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, Game %></td>
+      </tr>
+    <%end %>
+  </table>
+<%end %>
+
+<%= link_to 'Edit', edit_user_path(@user) if can? :update, User %> <br/>
+<%= link_to 'Back', users_path if can? :destroy, User %>

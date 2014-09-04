@@ -1,6 +1,7 @@
 body {
   font-family: Helvetica;
   margin: 0;
+  padding-bottom: 50px;
 }
 
 a {
@@ -15,7 +16,8 @@ a:visited {
 nav {
   background-color: black;
   margin-bottom: 50px;
-/*  display: fixed;*/
+  width: 100%;
+  
 }
 
 nav a {
@@ -27,6 +29,10 @@ nav a:visited {
   color: white;
 }
 
+div#nav_right {
+  float: right;
+}
+
 .wrapper {
   margin: 0 50px;
 }
@@ -35,17 +41,20 @@ nav a:visited {
   background-color: rgb(240, 240, 240);
   border:0;
   margin: 0;
-  height: 120px;
-  width: 120px;
+  height: 70px;
+  width: 70px;
   font-family: Helvetica;
   font-size: 3em;
   cursor: pointer;
 }
 
 table {
-  /*background-color: black;*/
   margin: 0 auto;
   text-align: center;
+}
+
+div.wrapper p {
+  line-height: 1.7;
 }
 
 span.game_stats {
@@ -55,3 +64,75 @@ span.game_stats {
 #notice {
   color: green;
 }
+
+div.field {
+  margin: 20px 0;
+}
+
+div.field input#game_grid_size {
+  padding: 8px 10px;
+  font-size: 1em;
+  font-family: Helvetica;
+  margin-top: 15px;
+}
+
+div.select_box {
+  width: 240px;
+  height: 34px;
+  overflow: hidden;
+  background: url(down_arrow_select.jpg) no-repeat right #ddd;
+  border: 1px solid #ccc;
+  margin-top: 15px;
+}
+
+select#game_player_2_id {
+  background: transparent;
+  font-family: Helvetica;
+  width: 268px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
+  -webkit-appearance: none;
+}
+
+div.actions input {
+  margin-bottom: 20px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-family: Helvetica;
+  padding: 10px 15px;
+  background-color: firebrick;
+  color: white;
+  font-weight: lighter;
+}
+
+table {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/*td {
+  width: 130px;
+  padding: 5px 0;
+}
+
+th {
+  border-bottom: 2px solid black;
+}*/
+
+
+.button {
+  background-color: rgb(240, 240, 240);
+  border:0;
+  margin: 0;
+  height: 70px;
+  width: 70px;
+  font-family: Helvetica;
+  font-size: 3em;
+  cursor: pointer;
+}
+

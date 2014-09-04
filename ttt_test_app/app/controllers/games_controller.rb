@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  
+  load_and_authorize_resource :move, except: [:index]
   # GET /games
   # GET /games.json
   def index

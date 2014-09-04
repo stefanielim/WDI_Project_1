@@ -37,8 +37,6 @@ class Game < ActiveRecord::Base
     [player_1, player_2]
   end
 
-  # Find all the moves of a player within a game
-  # Happens after a move is made by a player
   def last_player_moves
     moves.last.user.moves.where(game_id: self.id) if moves.present?
   end
@@ -47,9 +45,25 @@ class Game < ActiveRecord::Base
     last_player_moves.map(&:position) if last_player_moves.present?
   end
 
-  # Input those moves into a method that would check if any of the win conditions are a subset of the players moves
+  def winning_rows
+    (0...max_moves).map {|x| x + 1}.each_slice(grid_size).to_a
+  end
 
-  # positions = game.moves.where(user_id: p1.id).pluck(:position)
+  def winning_columns
+    (1..grid_size).map { |i| (0...grid_size).map {|x| grid_size*x + i} }
+  end
+
+  def winning_diagonal_lr
+    (0...grid_size).map {|x| (grid_size + 1)*x + 1 }
+  end
+  
+  def winning_diagonal_rl
+    (0...grid_size).map {|x| (grid_size - 1)*x + grid_size }
+  end
+
+  def winning_moves
+    winning_rows + winning_columns + [winning_diagonal_lr] + [winning_diagonal_rl]
+  end
 
   def won?
     return false if !last_player_positions
@@ -72,46 +86,30 @@ class Game < ActiveRecord::Base
 
   def set_winner_id_if_win
     reload
-    winner_id = moves.last.user.id and save! if won?
+    self.winner_id = moves.last.user.id and save! if won?
   end
 
   def change_outcome_if_finished
     reload
     if finished?
-      self.outcome = "Finished" 
-      save!
+      self.outcome = "Finished" and save!
     elsif player_2_id == 9
       computer_play
     end
   end
 
-  # def check_for_finished!
-  #   # TODO: add some way of tracking scores for users - here might be a good place
-  #   puts 'game is finished' if finished?
+  # if finished?
+  #   self.outcome = "Finished" 
+  #   save!
+  # if finished?
+  #   outcome = "Finished" and save! 
+  # elsif player_2_id == 9
+  #   computer_play
   # end
 
+
   def computer_play
-    moves.create!(user_id: 9,  position: ((1..9).to_a - moves.map(&:position)).sample) if whose_turn.id == 9
-  end
-
-  def winning_rows
-    (0...grid_size**2).map {|x| x + 1}.each_slice(grid_size).to_a
-  end
-
-  def winning_columns
-    (1..grid_size).map { |i| (0...grid_size).map {|x| grid_size*x + i} }
-  end
-
-  def winning_diagonal_lr
-    (0...grid_size).map {|x| (grid_size + 1)*x + 1 }
-  end
-  
-  def winning_diagonal_rl
-    (0...grid_size).map {|x| (grid_size - 1)*x + grid_size }
-  end
-
-  def winning_moves
-    winning_rows + winning_columns + [winning_diagonal_lr] + [winning_diagonal_rl]
+    moves.create!(user_id: 9,  position: ((1..max_moves).to_a - moves.map(&:position)).sample) if whose_turn.id == 9
   end
 
   private
@@ -120,11 +118,16 @@ class Game < ActiveRecord::Base
   end
 
   def valid_grid_size
-    errors.add(:base, "Please choose 3 as the grid size (more in next version!)") unless grid_size == 3
+    errors.add(:base, "Sorry, 3 is the smallest grid_size you can pick") unless grid_size >= 3
   end
 
   def set_outcome
     self.outcome ||= "In progress"
   end
+
+  # def check_for_finished!
+  #   # TODO: add some way of tracking scores for users - here might be a good place
+  #   puts 'game is finished' if finished?
+  # end
 
 end

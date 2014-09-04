@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TttTestApp</title>
+  <title>Epic TTT</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,30 +9,36 @@
 <body>
 
   <nav>
-    <%= link_to 'Games', games_path%>
-    <%= link_to 'Create Game', new_game_path %>
-    <%= link_to 'Players', users_path%>
-    <%= link_to 'Sign Up', new_user_path %>
-    <%= link_to 'Log In', new_session_path %>
-    <%= link_to 'Log Out', logout_path %>
+    <%= link_to 'All Games', games_path %>
+    <%= link_to 'My Games', user_path(current_user) if current_user%>
+    <%= link_to 'Create Game', new_game_path if can? :create, Game %>
+    <%= link_to 'Players', users_path if can? :read, User %>
+    <div id="nav_right">
+      <% if current_user %>
+        <%= link_to 'Log Out', logout_path%>
+      <% else %>
+        <%= link_to 'Log In', new_session_path %>
+        <%= link_to 'Sign Up', new_user_path%> 
+      <% end %>
+    </div>
   </nav>
 
   <%# flash.each do |name, msg| %>
-    <!-- <div class="flash-message flash-message-<%#= name %>"> -->
-      <%#= msg %>
-    <!-- </div> -->
+  <!-- <div class="flash-message flash-message-<%#= name %>"> -->
+  <%#= msg %>
+  <!-- </div> -->
   <%# end %>
   <div class="wrapper">
     <% if current_user %>
-      <p>
-        Hello, <b><%= current_user.email %>.</b><br />
-        You have <span class="game_stats"><%= pluralize(current_user.number_of_games_won, "win") %></span>, <span class="game_stats"><%= pluralize(current_user.number_of_games_lost, "loss") %></span> and <span class="game_stats"><%= pluralize(current_user.number_of_games_draw, "draw") %></span>.
-      </p>
+    <p>
+      Hello, <b><%= current_user.name %>.</b><br />
+      You have <span class="game_stats"><%= pluralize(current_user.number_of_games_won, "win") %></span>, <span class="game_stats"><%= pluralize(current_user.number_of_games_lost, "loss") %></span>, <span class="game_stats"><%= pluralize(current_user.number_of_games_draw, "draw") %></span> and <span class="game_stats"><%= pluralize(current_user.number_of_games_in_progress, "game")%> ongoing</span>.
+    </p>
     <% end %>
     
 
     <%= yield %>
-  
+
   </div>
 </body>
 </html>
