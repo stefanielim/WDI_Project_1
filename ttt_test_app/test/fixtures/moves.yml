@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  game: 
+  position: 1
+  marker: MyString
+
+two:
+  user: 
+  game: 
+  position: 1
+  marker: MyString

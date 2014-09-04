@@ -1,0 +1,57 @@
+body {
+  font-family: Helvetica;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0,140,186);
+}
+
+a:visited {
+  color: rgb(0,140,186);
+}
+
+nav {
+  background-color: black;
+  margin-bottom: 50px;
+/*  display: fixed;*/
+}
+
+nav a {
+  color: white;
+  padding: 20px 20px;
+  display: inline-block;
+}
+nav a:visited {
+  color: white;
+}
+
+.wrapper {
+  margin: 0 50px;
+}
+
+.button {
+  background-color: rgb(240, 240, 240);
+  border:0;
+  margin: 0;
+  height: 120px;
+  width: 120px;
+  font-family: Helvetica;
+  font-size: 3em;
+  cursor: pointer;
+}
+
+table {
+  /*background-color: black;*/
+  margin: 0 auto;
+  text-align: center;
+}
+
+span.game_stats {
+  font-weight: bold;
+}
+
+#notice {
+  color: green;
+}

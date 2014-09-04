@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td><%= button_to "#{@moves.where(position: 1).first.marker rescue nil}", make_move_path(position: 1), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 2).first.marker rescue nil}", make_move_path(position: 2), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 3).first.marker rescue nil}", make_move_path(position: 3), class: "button" %></td>
+  </tr>
+  <tr>
+    <td><%= button_to "#{@moves.where(position: 4).first.marker rescue nil}", make_move_path(position: 4), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 5).first.marker rescue nil}", make_move_path(position: 5), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 6).first.marker rescue nil}", make_move_path(position: 6), class: "button" %></td>
+  </tr>
+  <tr>
+    <td><%= button_to "#{@moves.where(position: 7).first.marker rescue nil}", make_move_path(position: 7), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 8).first.marker rescue nil}", make_move_path(position: 8), class: "button" %></td>
+    <td><%= button_to "#{@moves.where(position: 9).first.marker rescue nil}", make_move_path(position: 9), class: "button" %></td>
+  </tr>
+</table>  

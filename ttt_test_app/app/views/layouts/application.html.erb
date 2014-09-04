@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TttTestApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <nav>
+    <%= link_to 'Games', games_path%>
+    <%= link_to 'Create Game', new_game_path %>
+    <%= link_to 'Players', users_path%>
+    <%= link_to 'Sign Up', new_user_path %>
+    <%= link_to 'Log In', new_session_path %>
+    <%= link_to 'Log Out', logout_path %>
+  </nav>
+
+  <%# flash.each do |name, msg| %>
+    <!-- <div class="flash-message flash-message-<%#= name %>"> -->
+      <%#= msg %>
+    <!-- </div> -->
+  <%# end %>
+  <div class="wrapper">
+    <% if current_user %>
+      <p>
+        Hello, <b><%= current_user.email %>.</b><br />
+        You have <span class="game_stats"><%= pluralize(current_user.number_of_games_won, "win") %></span>, <span class="game_stats"><%= pluralize(current_user.number_of_games_lost, "loss") %></span> and <span class="game_stats"><%= pluralize(current_user.number_of_games_draw, "draw") %></span>.
+      </p>
+    <% end %>
+    
+
+    <%= yield %>
+  
+  </div>
+</body>
+</html>
