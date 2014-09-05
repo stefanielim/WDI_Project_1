@@ -10,7 +10,7 @@
   <%= @user.email %>
 </p>
 
-<h1>Your games</h1>
+<h1><%= @user.name%>'s games</h1>
 
 <% if @user.games == [] %>
   <p>You have no games at the moment. <%= link_to "Create one!", new_game_path%></p>

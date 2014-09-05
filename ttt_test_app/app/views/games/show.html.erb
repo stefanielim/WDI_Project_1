@@ -21,7 +21,7 @@
 <p>
   <b>Winner:</b>
   <% if @game.winner_id? %>
-    <%= @game.winner.name%>
+  <%= @game.winner.name%>
   <% else %>
     N/A   
   <% end %>
@@ -35,28 +35,28 @@
 <% if @game.finished? && @game.won?%>
 <h2>And we have a winner! <br/>
   Congratulations, <%= @game.winner.name%></h2>
-<% end %>
+  <% end %>
 
-<% if @game.finished? && @game.draw?%>
-<h2>And we have a draw... :( </h2>
-<% end %>
+  <% if @game.finished? && @game.draw?%>
+  <h2>And we have a draw... :( </h2>
+  <% end %>
 
-<% if @move && @move.errors.any? %>
-<div id="error_explanation">
-  <h3><%= pluralize(@move.errors.count, "error") %> prohibited this move:</h3>
+  <% if @move && @move.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= pluralize(@move.errors.count, "error") %> prohibited this move:</h3>
 
-  <ul>
-    <% @move.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+    <ul>
+      <% @move.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-<div>
+  <div>
 
-  <%= render 'move' %>
-</div>
+    <%= render 'move' %>
+  </div>
 
 
-<%= link_to 'Back', games_path %>
+  <%= link_to '< Back', games_path %>

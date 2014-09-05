@@ -93,7 +93,7 @@ class Game < ActiveRecord::Base
     reload
     if finished?
       self.outcome = "Finished" and save!
-    elsif player_2_id == 9
+    elsif player_2_id == 1
       computer_play
     end
   end
@@ -109,7 +109,7 @@ class Game < ActiveRecord::Base
 
 
   def computer_play
-    moves.create!(user_id: 9,  position: ((1..max_moves).to_a - moves.map(&:position)).sample) if whose_turn.id == 9
+    moves.create!(user_id: 1,  position: ((1..max_moves).to_a - moves.map(&:position)).sample) if whose_turn.id == 1
   end
 
   private

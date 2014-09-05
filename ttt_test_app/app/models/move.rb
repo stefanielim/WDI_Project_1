@@ -30,19 +30,19 @@ class Move < ActiveRecord::Base
   end
 
   def is_users_turn
-    errors.add(:player, "Sorry, it's not your turn") unless game.whose_turn == user 
+    errors.add(:base, "Sorry, it's not your turn") unless game.whose_turn == user 
   end
 
   def empty_position?
-    errors.add(:position, "Sorry, that position has already been taken") unless !game.get_all_positions.include? position
+    errors.add(:position, "has already been taken") unless !game.get_all_positions.include? position
   end
 
   def position_in_board
-    errors.add(:position, "Sorry that position is not within the grid") unless (position > 0 && position <= game.max_moves)
+    errors.add(:position, "is not within the grid") unless (position > 0 && position <= game.max_moves)
   end
 
   def player_validity
-    errors.add(:player, "Sorry that is not a valid player for this game") unless game.find_players.include? self.user
+    errors.add(:player, "is not a valid player for this game") unless game.find_players.include? self.user
   end
 
   def check_finished?

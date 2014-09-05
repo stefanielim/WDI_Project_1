@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
 
-  has_many :games
-  has_many :moves
+  has_many :games, dependent: :destroy
+  has_many :moves, dependent: :destroy
 
   def role?(role_to_compare)
     self.role.to_s == role_to_compare.to_s

@@ -59,9 +59,9 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1/edit
-  # def edit
-  #   @game = Game.find(params[:id])
-  # end
+  def edit
+    @game = Game.find(params[:id])
+  end
 
   # POST /games
   # POST /games.json
