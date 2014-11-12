@@ -38,7 +38,7 @@ div#nav_right {
 }
 
 .button {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(230, 230, 230);
   border:0;
   margin: 0;
   height: 70px;
@@ -51,6 +51,7 @@ div#nav_right {
 table {
   margin: 0 auto;
   text-align: center;
+  background: #ccc;
 }
 
 div.wrapper p {

@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
 
   before_create :set_outcome
 
-  WINS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
+  # WINS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
 
   def max_moves
     grid_size ** 2
@@ -44,7 +44,7 @@ class Game < ActiveRecord::Base
   def last_player_positions
     last_player_moves.map(&:position) if last_player_moves.present?
   end
-
+### DYNAMIC WIN CONDITIONS
   def winning_rows
     (0...max_moves).map {|x| x + 1}.each_slice(grid_size).to_a
   end
@@ -67,13 +67,9 @@ class Game < ActiveRecord::Base
 
   def won?
     return false if !last_player_positions
-    win = false
-    winning_moves.each do |array|
-      if array.to_set.subset?(last_player_positions.to_set)
-        win = true
-      end
+    winning_moves.detect do |array|
+      array.to_set.subset?(last_player_positions.to_set)
     end
-    win
   end
 
   def draw?

@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to '/unauthorised.html', alert: "Sorry, you can't access this page"
+    redirect_to root_path, alert: "Sorry, you can't access this page"
   end
   
 end
+# '/unauthorised.html'
